@@ -180,7 +180,7 @@ public class RPS_FORM extends javax.swing.JFrame {
 
         jButton28.setText(".");
 
-        jButton29.setBackground(new java.awt.Color(255, 51, 102));
+        jButton29.setBackground(new java.awt.Color(204, 0, 51));
         jButton29.setText("DELETE");
 
         jButton30.setText("mod");
