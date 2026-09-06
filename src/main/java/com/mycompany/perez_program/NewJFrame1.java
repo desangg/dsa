@@ -15,7 +15,7 @@ public class NewJFrame1 extends javax.swing.JFrame {
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(NewJFrame1.class.getName());
 
     /**
-     * Creates new form NewJFrame1
+     * Creates new form NewJFrame1*
      */
     public NewJFrame1() {
         initComponents();
