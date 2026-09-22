@@ -13,7 +13,7 @@ import javax.swing.JOptionPane;
 public class MsConnectAccess {
     public static Connection conn() {
         try {
-            String url = "jdbc:ucanaccess://C://Users//CL2-PC//Documents/perez_DATABASE.accdb";
+            String url = "jdbc:ucanaccess://C://Users//CL2-PC//Downloads//DSA_PEREZ-masters//datajavaconnect//Database21.accdb/";
             Connection conn = DriverManager.getConnection(url);
             return conn;
         } catch (SQLException e) {
