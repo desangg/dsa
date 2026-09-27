@@ -57,22 +57,18 @@ public class CAFETERIA extends javax.swing.JFrame {
         txtPRODUCT.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Segoe UI Black", 0, 48)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setText("MENU");
         txtPRODUCT.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 20, -1, -1));
 
         jLabel2.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
         jLabel2.setText("SNACKS");
         txtPRODUCT.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 120, -1, -1));
 
         jLabel3.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(0, 0, 0));
         jLabel3.setText("DRINKS");
         txtPRODUCT.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 120, -1, -1));
 
         jLabel10.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel10.setForeground(new java.awt.Color(0, 0, 0));
         jLabel10.setText("CHANGE  :");
         txtPRODUCT.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 390, -1, -1));
 
@@ -81,19 +77,16 @@ public class CAFETERIA extends javax.swing.JFrame {
         txtPRODUCT.add(txtTOTALPRICE, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 320, 230, -1));
 
         jLabel11.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel11.setForeground(new java.awt.Color(0, 0, 0));
         jLabel11.setText("QUANTITY :");
         txtPRODUCT.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 280, -1, -1));
         txtPRODUCT.add(txtQUANTITY, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 280, 230, -1));
 
         jLabel12.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel12.setForeground(new java.awt.Color(0, 0, 0));
         jLabel12.setText("TOTAL PRICE : ");
         txtPRODUCT.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 320, -1, -1));
         txtPRODUCT.add(txtCHANGE, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 400, 230, -1));
 
         btnTOTAL.setBackground(new java.awt.Color(204, 0, 0));
-        btnTOTAL.setForeground(new java.awt.Color(0, 0, 0));
         btnTOTAL.setText("TOTAL");
         btnTOTAL.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -103,32 +96,25 @@ public class CAFETERIA extends javax.swing.JFrame {
         txtPRODUCT.add(btnTOTAL, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 460, 130, 30));
 
         jLabel13.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel13.setForeground(new java.awt.Color(0, 0, 0));
         jLabel13.setText("ENTER AMOUNT : ");
         txtPRODUCT.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 360, -1, -1));
         txtPRODUCT.add(txtAMOUNT, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 360, 230, -1));
 
-        chk_cupcake.setForeground(new java.awt.Color(0, 0, 0));
         chk_cupcake.setText("Cupcake ₱50");
         txtPRODUCT.add(chk_cupcake, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 160, -1, -1));
 
-        cake.setForeground(new java.awt.Color(0, 0, 0));
         cake.setText("Cake ₱250");
         txtPRODUCT.add(cake, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 200, -1, -1));
 
-        bentocake.setForeground(new java.awt.Color(0, 0, 0));
         bentocake.setText("BentoCake ₱200");
         txtPRODUCT.add(bentocake, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 240, -1, -1));
 
-        strawberry.setForeground(new java.awt.Color(0, 0, 0));
         strawberry.setText("Strawberry shake ₱150");
         txtPRODUCT.add(strawberry, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 160, -1, -1));
 
-        mango.setForeground(new java.awt.Color(0, 0, 0));
         mango.setText("Mango Shake ₱150");
         txtPRODUCT.add(mango, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 200, -1, -1));
 
-        blueberry.setForeground(new java.awt.Color(0, 0, 0));
         blueberry.setText("BlueBerry Shake ₱150");
         txtPRODUCT.add(blueberry, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 240, -1, -1));
 

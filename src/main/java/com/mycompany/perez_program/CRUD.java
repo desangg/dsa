@@ -4,17 +4,34 @@
  */
 package com.mycompany.perez_program;
 
+import javax.swing.JOptionPane;
+
+
 /**
  *
  * @author CL2-PC
  */
 public class CRUD extends javax.swing.JFrame {
+  javax.swing.table.DefaultTableModel model;
 
     /**
      * Creates new form CRUD
      */
     public CRUD() {
-        initComponents();
+          initComponents();
+   
+        model = new javax.swing.table.DefaultTableModel();
+
+        model.setColumnIdentifiers(new Object[]{
+            "Student ID",
+            "Student No",
+            "Student Name",
+            "Contact No",
+            "Address"
+        });
+
+        jTable1.setModel(model);
+ 
     }
 
     /**
@@ -26,96 +43,430 @@ public class CRUD extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
+        jPanel6 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
-        jPanel3 = new javax.swing.JPanel();
+        jPanel4 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
+        txt_studentnum = new javax.swing.JTextField();
+        txt_studentname = new javax.swing.JTextField();
+        txt_contactnum = new javax.swing.JTextField();
+        txt_address = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jPanel4 = new javax.swing.JPanel();
+        jLabel6 = new javax.swing.JLabel();
+        btn_register = new javax.swing.JButton();
+        btn_clear = new javax.swing.JButton();
+        jPanel3 = new javax.swing.JPanel();
+        jPanel7 = new javax.swing.JPanel();
+        jLabel7 = new javax.swing.JLabel();
+        txt_search = new javax.swing.JTextField();
+        btn_search = new javax.swing.JButton();
+        btn_refresh = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+        jPanel5 = new javax.swing.JPanel();
+        btn_update = new javax.swing.JButton();
+        btn_delete = new javax.swing.JButton();
+        btn_logout = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel1.setForeground(new java.awt.Color(153, 153, 153));
+        jPanel6.setBackground(new java.awt.Color(153, 255, 255));
+        jPanel6.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 3));
+        jPanel6.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 36)); // NOI18N
+        jLabel1.setText("STUDENT MANAGEMENT SYSTEM");
+        jPanel6.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 10, -1, -1));
+
+        getContentPane().add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 990, 60));
+
+        jPanel1.setBackground(new java.awt.Color(102, 153, 255));
+        jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 4));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI Black", 1, 24)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel1.setText("STUDENT RECORD");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 10, -1, -1));
-
-        jButton1.setBackground(new java.awt.Color(255, 51, 51));
-        jButton1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(0, 0, 0));
-        jButton1.setText("DELETE RECORD");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 70, -1, -1));
-
-        jButton2.setBackground(new java.awt.Color(51, 102, 255));
-        jButton2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(0, 0, 0));
-        jButton2.setText("UPDATE RECORD");
-        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 70, -1, -1));
-
-        jButton3.setBackground(new java.awt.Color(0, 255, 0));
-        jButton3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jButton3.setForeground(new java.awt.Color(0, 0, 0));
-        jButton3.setText("ADD RECORD");
-        jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 70, -1, -1));
-
-        jPanel2.setBackground(new java.awt.Color(153, 204, 255));
+        jPanel2.setBackground(new java.awt.Color(0, 102, 255));
+        jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 5));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel3.setBackground(new java.awt.Color(0, 0, 153));
+        jPanel4.setBackground(new java.awt.Color(0, 102, 102));
+        jPanel4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 5));
+        jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel2.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setText("REGISTER STUDENT");
+        jPanel4.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 10, -1, -1));
+
+        jPanel2.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 350, 40));
+        jPanel2.add(txt_studentnum, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 70, 180, -1));
+        jPanel2.add(txt_studentname, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 120, 180, -1));
+        jPanel2.add(txt_contactnum, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 170, 180, -1));
+        jPanel2.add(txt_address, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 220, 180, -1));
+
+        jLabel3.setFont(new java.awt.Font("Segoe UI Black", 1, 14)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel3.setText("Student Number :");
+        jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, -1, -1));
+
+        jLabel4.setFont(new java.awt.Font("Segoe UI Black", 1, 14)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel4.setText("Student Name : ");
+        jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 120, -1, -1));
+
+        jLabel5.setFont(new java.awt.Font("Segoe UI Black", 1, 14)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel5.setText("Contact Number :");
+        jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 170, -1, -1));
+
+        jLabel6.setFont(new java.awt.Font("Segoe UI Black", 1, 14)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel6.setText("Address :");
+        jPanel2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 220, -1, -1));
+
+        btn_register.setBackground(new java.awt.Color(0, 204, 51));
+        btn_register.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btn_register.setText("REGISTER");
+        btn_register.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_registerActionPerformed(evt);
+            }
+        });
+        jPanel2.add(btn_register, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 280, 150, 30));
+
+        btn_clear.setBackground(new java.awt.Color(204, 0, 0));
+        btn_clear.setFont(new java.awt.Font("Segoe UI Black", 1, 12)); // NOI18N
+        btn_clear.setText("CLEAR");
+        btn_clear.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_clearActionPerformed(evt);
+            }
+        });
+        jPanel2.add(btn_clear, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 280, 80, 30));
+
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 350, 350));
+
+        jPanel3.setBackground(new java.awt.Color(0, 0, 204));
+        jPanel3.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 5, true));
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel2.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel2.setText("STUDENT ID");
-        jPanel3.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, -1, 20));
+        jPanel7.setBackground(new java.awt.Color(0, 153, 153));
+        jPanel7.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 5));
+        jPanel7.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel3.setBackground(new java.awt.Color(0, 0, 0));
-        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel3.setText("STUDENT NO.");
-        jPanel3.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 20, -1, -1));
+        jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel7.setText("Search Record :");
+        jPanel7.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 150, 20));
+        jPanel7.add(txt_search, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 20, 240, 30));
 
-        jLabel4.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel4.setText("STUDENT NAME");
-        jPanel3.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 20, -1, -1));
+        btn_search.setFont(new java.awt.Font("Segoe UI Black", 1, 12)); // NOI18N
+        btn_search.setText("Search");
+        btn_search.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_searchActionPerformed(evt);
+            }
+        });
+        jPanel7.add(btn_search, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 20, -1, 30));
 
-        jLabel5.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel5.setText("CONTACT NO.");
-        jPanel3.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 20, -1, -1));
+        btn_refresh.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btn_refresh.setText("Refresh");
+        btn_refresh.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_refreshActionPerformed(evt);
+            }
+        });
+        jPanel7.add(btn_refresh, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 20, 90, 30));
 
-        jPanel2.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(-14, 0, 790, 50));
+        jPanel3.add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 610, 70));
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 110, 770, 430));
+        jScrollPane1.setBackground(new java.awt.Color(102, 255, 255));
+        jScrollPane1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 5));
 
-        jPanel4.setBackground(new java.awt.Color(0, 0, 102));
-        jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 770, 50));
+        jTable1.setBackground(new java.awt.Color(153, 255, 255));
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 770, 540));
+            },
+            new String [] {
+                "Student ID", "Student No", "Student Name", "Contact No", "Address"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, true, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(jTable1);
+
+        jPanel3.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, 590, 510));
+
+        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 10, 610, 590));
+
+        jPanel5.setBackground(new java.awt.Color(0, 102, 204));
+        jPanel5.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 5));
+        jPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        btn_update.setText("UPDATE");
+        btn_update.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_updateActionPerformed(evt);
+            }
+        });
+        jPanel5.add(btn_update, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, -1, -1));
+
+        btn_delete.setText("DELETE");
+        btn_delete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_deleteActionPerformed(evt);
+            }
+        });
+        jPanel5.add(btn_delete, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 100, -1, -1));
+
+        btn_logout.setText("LOGOUT");
+        btn_logout.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_logoutActionPerformed(evt);
+            }
+        });
+        jPanel5.add(btn_logout, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 60, -1, -1));
+
+        jPanel1.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 370, 350, 220));
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 990, 610));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void btn_searchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_searchActionPerformed
+      
+    String search = txt_search.getText().trim().toLowerCase();
+
+    if (search.isEmpty()) {
+
+        JOptionPane.showMessageDialog(
+            this,
+            "Please enter a student number or student name."
+        );
+
+        return;
+    }
+
+    boolean found = false;
+
+    for (int i = 0; i < model.getRowCount(); i++) {
+
+        String studentNo =
+            model.getValueAt(i, 1).toString().toLowerCase();
+
+        String studentName =
+            model.getValueAt(i, 2).toString().toLowerCase();
+
+        if (studentNo.contains(search) ||
+            studentName.contains(search)) {
+
+            jTable1.setRowSelectionInterval(i, i);
+
+            jTable1.scrollRectToVisible(
+                jTable1.getCellRect(i, 0, true)
+            );
+
+            found = true;
+            break;
+        }
+    }
+
+    if (!found) {
+
+        JOptionPane.showMessageDialog(
+            this,
+            "Student record not found.",
+            "Search",
+            JOptionPane.INFORMATION_MESSAGE
+        );
+    }
+    }//GEN-LAST:event_btn_searchActionPerformed
+
+    private void btn_logoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_logoutActionPerformed
+         int a = JOptionPane.showConfirmDialog(this, "Do you want to LOGOUT now?", "Select", JOptionPane.YES_NO_OPTION);
+         if (a == 0) {
+             this.dispose();
+         }
+    }//GEN-LAST:event_btn_logoutActionPerformed
+
+    private void btn_refreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_refreshActionPerformed
+        
+
+    txt_search.setText("");
+    jTable1.clearSelection();
+
+    JOptionPane.showMessageDialog(this,"Student records refreshed.");
+
+    }//GEN-LAST:event_btn_refreshActionPerformed
+
+    private void btn_clearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_clearActionPerformed
+      
+
+    txt_studentnum.setText("");
+    txt_studentname.setText("");
+    txt_contactnum.setText("");
+    txt_address.setText("");
+   
+
+    }//GEN-LAST:event_btn_clearActionPerformed
+
+    private void btn_deleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_deleteActionPerformed
+        int selectedRow = jTable1.getSelectedRow();
+
+    if (selectedRow == -1) {
+
+        JOptionPane.showMessageDialog(
+            this,
+            "Please select a student to delete.",
+            "No Student Selected",
+            JOptionPane.WARNING_MESSAGE
+        );
+
+        return;
+    }
+
+    int confirm = JOptionPane.showConfirmDialog(
+        this,
+        "Are you sure you want to delete this student?",
+        "Confirm Delete",
+        JOptionPane.YES_NO_OPTION
+    );
+
+    if (confirm == JOptionPane.YES_OPTION) {
+
+        model.removeRow(selectedRow);
+
+        JOptionPane.showMessageDialog(
+            this,
+            "Student deleted successfully!"
+        );
+
+        
+    }
+
+    }//GEN-LAST:event_btn_deleteActionPerformed
+
+    private void btn_updateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_updateActionPerformed
+         int selectedRow = jTable1.getSelectedRow();
+
+    if (selectedRow == -1) {
+
+        JOptionPane.showMessageDialog(
+            this,
+            "Please select a student from the table first.",
+            "No Student Selected",
+            JOptionPane.WARNING_MESSAGE
+        );
+
+        return;
+    }
+
+    model.setValueAt(
+        txt_studentnum.getText(),
+        selectedRow,
+        1
+    );
+
+    model.setValueAt(
+        txt_studentname.getText(),
+        selectedRow,
+        2
+    );
+
+    model.setValueAt(
+        txt_contactnum.getText(),
+        selectedRow,
+        3
+    );
+
+    model.setValueAt(
+        txt_address.getText(),
+        selectedRow,
+        4
+    );
+
+    JOptionPane.showMessageDialog(
+        this,
+        "Student information updated successfully!"
+    );
+
+   
+    }//GEN-LAST:event_btn_updateActionPerformed
+
+    private void btn_registerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_registerActionPerformed
+    String studentno = txt_studentnum.getText();
+    String studentname = txt_studentname.getText();
+    String contact = txt_contactnum.getText();
+    String address = txt_address.getText();
+
+    if (studentno.isEmpty() ||
+        studentname.isEmpty() ||
+        contact.isEmpty() ||
+        address.isEmpty()) {
+
+        JOptionPane.showMessageDialog(this,"Please complete all fields.","Incomplete Information",JOptionPane.WARNING_MESSAGE);
+
+        return;
+    }
+
+    int studentID = model.getRowCount() + 1;
+
+    model.addRow(new Object[]{
+        studentID,
+        studentno,
+        studentname,
+        contact,
+        address
+    });
+
+    JOptionPane.showMessageDialog(
+        this,
+        "Student registered successfully!"
+    );
+
+    
+
+    }//GEN-LAST:event_btn_registerActionPerformed
+
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+        int selectedRow = jTable1.getSelectedRow();
+
+    if (selectedRow >= 0) {
+
+        txt_studentnum.setText(
+            model.getValueAt(selectedRow, 1).toString()
+        );
+
+        txt_studentname.setText(
+            model.getValueAt(selectedRow, 2).toString()
+        );
+
+        txt_contactnum.setText(
+            model.getValueAt(selectedRow, 3).toString()
+        );
+
+        txt_address.setText(
+            model.getValueAt(selectedRow, 4).toString()
+        );
+    }
+    }//GEN-LAST:event_jTable1MouseClicked
 
     /**
      * @param args the command line arguments
@@ -153,17 +504,33 @@ public class CRUD extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JButton btn_clear;
+    private javax.swing.JButton btn_delete;
+    private javax.swing.JButton btn_logout;
+    private javax.swing.JButton btn_refresh;
+    private javax.swing.JButton btn_register;
+    private javax.swing.JButton btn_search;
+    private javax.swing.JButton btn_update;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
+    private javax.swing.JPanel jPanel7;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTable1;
+    private javax.swing.JTextField txt_address;
+    private javax.swing.JTextField txt_contactnum;
+    private javax.swing.JTextField txt_search;
+    private javax.swing.JTextField txt_studentname;
+    private javax.swing.JTextField txt_studentnum;
     // End of variables declaration//GEN-END:variables
 }
