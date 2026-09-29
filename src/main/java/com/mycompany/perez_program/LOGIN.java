@@ -3,25 +3,36 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package com.mycompany.perez_program;
+
+import com.mycompany.perez_program.MsConnectAccess;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 
-
 public class LOGIN extends javax.swing.JFrame {
-Connection conn;
+
+    Connection conn;
     PreparedStatement pst;
     ResultSet rs;
 
-   
     public LOGIN() {
-        initComponents();
-        conn = MsConnectAccess.conn();
-        
-    }
 
+        initComponents();
+
+        conn = MsConnectAccess.conn();
+
+        if (conn == null) {
+
+            JOptionPane.showMessageDialog(
+                this,
+                "Unable to connect to Database21.accdb.",
+                "Database Error",
+                JOptionPane.ERROR_MESSAGE
+            );
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -90,33 +101,82 @@ Connection conn;
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-       String username = txt_username.getText();
-        char[] pass = txt_password.getPassword();
-        String userpassword = String.valueOf(pass);
-        
-        try{
-        String sqlquery = "Select * From Table1 WHERE user_name = ? and user_password = ? ";
+        String username = txt_username.getText().trim();
+
+    char[] pass = txt_password.getPassword();
+    String userpassword = String.valueOf(pass);
+
+    if (username.isEmpty() || userpassword.isEmpty()) {
+
+        JOptionPane.showMessageDialog(
+            this,
+            "Please enter username and password.",
+            "Login",
+            JOptionPane.WARNING_MESSAGE
+        );
+
+        return;
+    }
+
+    if (conn == null) {
+
+        JOptionPane.showMessageDialog(
+            this,
+            "Database connection failed.",
+            "Database Error",
+            JOptionPane.ERROR_MESSAGE
+        );
+
+        return;
+    }
+
+    String sqlquery =
+        "SELECT * FROM Table1 "
+        + "WHERE [user_name] = ? "
+        + "AND [user_password] = ?";
+
+    try {
+
         pst = conn.prepareStatement(sqlquery);
-        pst.setString(1,username);
+
+        pst.setString(1, username);
         pst.setString(2, userpassword);
-            rs = pst.executeQuery();
-            
-            if(!rs.next())
-            {
-            JOptionPane.showMessageDialog(null,"incorrect input either username or password");
-            
-            }
-            else
-            {
-            JOptionPane.showMessageDialog(null,"login successfull");
+
+        rs = pst.executeQuery();
+
+        if (rs.next()) {
+
+            JOptionPane.showMessageDialog(
+                this,
+                "Login successful!"
+            );
+
             CRUD form = new CRUD();
+
+            form.setLocationRelativeTo(null);
             form.setVisible(true);
+
             this.dispose();
-            }
-        }catch(SQLException e){
-            
-            JOptionPane.showMessageDialog(null, e);
+
+        } else {
+
+            JOptionPane.showMessageDialog(
+                this,
+                "Incorrect username or password.",
+                "Login Failed",
+                JOptionPane.ERROR_MESSAGE
+            );
         }
+
+    } catch (SQLException e) {
+
+        JOptionPane.showMessageDialog(
+            this,
+            "Login database error:\n" + e.getMessage(),
+            "Database Error",
+            JOptionPane.ERROR_MESSAGE
+        );
+    }
         
         
          

@@ -4,23 +4,23 @@
  */
 package com.mycompany.perez_program;
 
+import com.mycompany.perez_program.LOGIN;
+import com.mycompany.perez_program.MsConnectAccess;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
-
-/**
- *
- * @author CL2-PC
- */
 public class CRUD extends javax.swing.JFrame {
-  javax.swing.table.DefaultTableModel model;
 
-    /**
-     * Creates new form CRUD
-     */
+    DefaultTableModel model;
+
     public CRUD() {
-          initComponents();
-   
-        model = new javax.swing.table.DefaultTableModel();
+        initComponents();
+
+        model = new DefaultTableModel();
 
         model.setColumnIdentifiers(new Object[]{
             "Student ID",
@@ -31,8 +31,52 @@ public class CRUD extends javax.swing.JFrame {
         });
 
         jTable1.setModel(model);
- 
+
+        loadStudents();
     }
+    private void loadStudents() {
+
+    model.setRowCount(0);
+
+    String sql =
+        "SELECT [Student ID], "
+        + "[Student No], "
+        + "[Student Name], "
+        + "[Contact No], "
+        + "[Address] "
+        + "FROM Table2 "
+        + "ORDER BY [Student ID]";
+
+    try (
+        Connection con = MsConnectAccess.conn();
+        PreparedStatement pst = con.prepareStatement(sql);
+        ResultSet rs = pst.executeQuery()
+    ) {
+
+        while (rs.next()) {
+
+            model.addRow(new Object[]{
+                rs.getInt("Student ID"),
+                rs.getString("Student No"),
+                rs.getString("Student Name"),
+                rs.getString("Contact No"),
+                rs.getString("Address")
+            });
+        }
+
+    } catch (SQLException e) {
+
+        JOptionPane.showMessageDialog(
+            this,
+            "Error loading student records:\n"
+            + e.getMessage(),
+            "Database Error",
+            JOptionPane.ERROR_MESSAGE
+        );
+    }
+}
+    
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -233,7 +277,7 @@ public class CRUD extends javax.swing.JFrame {
                 btn_deleteActionPerformed(evt);
             }
         });
-        jPanel5.add(btn_delete, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 100, -1, -1));
+        jPanel5.add(btn_delete, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 103, -1, 20));
 
         btn_logout.setText("LOGOUT");
         btn_logout.addActionListener(new java.awt.event.ActionListener() {
@@ -251,84 +295,143 @@ public class CRUD extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_searchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_searchActionPerformed
-      
-    String search = txt_search.getText().trim().toLowerCase();
+    String search =
+        txt_search.getText().trim();
 
     if (search.isEmpty()) {
 
         JOptionPane.showMessageDialog(
             this,
-            "Please enter a student number or student name."
+            "Please enter a student number or student name.",
+            "Search",
+            JOptionPane.WARNING_MESSAGE
         );
 
         return;
     }
 
-    boolean found = false;
+    model.setRowCount(0);
 
-    for (int i = 0; i < model.getRowCount(); i++) {
+    String sql =
+        "SELECT [Student ID], "
+        + "[Student No], "
+        + "[Student Name], "
+        + "[Contact No], "
+        + "[Address] "
+        + "FROM Table2 "
+        + "WHERE [Student No] LIKE ? "
+        + "OR [Student Name] LIKE ? "
+        + "ORDER BY [Student ID]";
 
-        String studentNo =
-            model.getValueAt(i, 1).toString().toLowerCase();
+    try (
+        Connection con = MsConnectAccess.conn();
+        PreparedStatement pst =
+            con.prepareStatement(sql)
+    ) {
 
-        String studentName =
-            model.getValueAt(i, 2).toString().toLowerCase();
+        pst.setString(1, "%" + search + "%");
+        pst.setString(2, "%" + search + "%");
 
-        if (studentNo.contains(search) ||
-            studentName.contains(search)) {
+        ResultSet rs = pst.executeQuery();
 
-            jTable1.setRowSelectionInterval(i, i);
+        boolean found = false;
 
-            jTable1.scrollRectToVisible(
-                jTable1.getCellRect(i, 0, true)
-            );
+        while (rs.next()) {
 
             found = true;
-            break;
-        }
-    }
 
-    if (!found) {
+            model.addRow(new Object[]{
+                rs.getInt("Student ID"),
+                rs.getString("Student No"),
+                rs.getString("Student Name"),
+                rs.getString("Contact No"),
+                rs.getString("Address")
+            });
+        }
+
+        if (!found) {
+
+            JOptionPane.showMessageDialog(
+                this,
+                "Student record not found.",
+                "Search",
+                JOptionPane.INFORMATION_MESSAGE
+            );
+
+            loadStudents();
+        }
+
+    } catch (SQLException e) {
 
         JOptionPane.showMessageDialog(
             this,
-            "Student record not found.",
-            "Search",
-            JOptionPane.INFORMATION_MESSAGE
+            "Error searching records:\n"
+            + e.getMessage(),
+            "Database Error",
+            JOptionPane.ERROR_MESSAGE
         );
     }
+
     }//GEN-LAST:event_btn_searchActionPerformed
 
     private void btn_logoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_logoutActionPerformed
-         int a = JOptionPane.showConfirmDialog(this, "Do you want to LOGOUT now?", "Select", JOptionPane.YES_NO_OPTION);
-         if (a == 0) {
-             this.dispose();
-         }
+        int answer = JOptionPane.showConfirmDialog(
+        this,
+        "Do you want to LOGOUT now?",
+        "Confirm Logout",
+        JOptionPane.YES_NO_OPTION
+    );
+
+    if (answer == JOptionPane.YES_OPTION) {
+
+        try {
+
+            if (MsConnectAccess.conn() != null) {
+                MsConnectAccess.conn().close();
+            }
+
+        } catch (SQLException e) {
+            // Ignore close error
+        }
+
+        this.dispose();
+
+        LOGIN login = new LOGIN();
+        login.setLocationRelativeTo(null);
+        login.setVisible(true);
+    }
     }//GEN-LAST:event_btn_logoutActionPerformed
 
     private void btn_refreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_refreshActionPerformed
-        
-
     txt_search.setText("");
-    jTable1.clearSelection();
 
-    JOptionPane.showMessageDialog(this,"Student records refreshed.");
+    clearFields();
 
+    loadStudents();
+
+    JOptionPane.showMessageDialog(
+        this,
+        "Student records refreshed."
+    );
     }//GEN-LAST:event_btn_refreshActionPerformed
-
-    private void btn_clearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_clearActionPerformed
-      
+private void clearFields() {
 
     txt_studentnum.setText("");
     txt_studentname.setText("");
     txt_contactnum.setText("");
     txt_address.setText("");
-   
+
+    jTable1.clearSelection();
+}
+    private void btn_clearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_clearActionPerformed
+       clearFields();      
+    
 
     }//GEN-LAST:event_btn_clearActionPerformed
 
     private void btn_deleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_deleteActionPerformed
-        int selectedRow = jTable1.getSelectedRow();
+    int selectedRow =
+        jTable1.getSelectedRow();
 
     if (selectedRow == -1) {
 
@@ -342,107 +445,175 @@ public class CRUD extends javax.swing.JFrame {
         return;
     }
 
-    int confirm = JOptionPane.showConfirmDialog(
-        this,
-        "Are you sure you want to delete this student?",
-        "Confirm Delete",
-        JOptionPane.YES_NO_OPTION
+    int studentID = Integer.parseInt(
+        model.getValueAt(
+            selectedRow,
+            0
+        ).toString()
     );
 
-    if (confirm == JOptionPane.YES_OPTION) {
+    String studentName =
+        model.getValueAt(
+            selectedRow,
+            2
+        ).toString();
 
-        model.removeRow(selectedRow);
+    int confirm = JOptionPane.showConfirmDialog(
+        this,
+        "Are you sure you want to delete:\n"
+        + studentName + "?",
+        "Confirm Delete",
+        JOptionPane.YES_NO_OPTION,
+        JOptionPane.WARNING_MESSAGE
+    );
+
+    if (confirm != JOptionPane.YES_OPTION) {
+        return;
+    }
+
+    String sql =
+        "DELETE FROM Table2 "
+        + "WHERE [Student ID] = ?";
+
+    try (
+        Connection con = MsConnectAccess.conn();
+        PreparedStatement pst =
+            con.prepareStatement(sql)
+    ) {
+
+        pst.setInt(1, studentID);
+
+        pst.executeUpdate();
 
         JOptionPane.showMessageDialog(
             this,
             "Student deleted successfully!"
         );
 
-        
+        clearFields();
+
+        loadStudents();
+
+    } catch (SQLException e) {
+
+        JOptionPane.showMessageDialog(
+            this,
+            "Error deleting student:\n"
+            + e.getMessage(),
+            "Database Error",
+            JOptionPane.ERROR_MESSAGE
+        );
     }
 
     }//GEN-LAST:event_btn_deleteActionPerformed
 
     private void btn_updateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_updateActionPerformed
-         int selectedRow = jTable1.getSelectedRow();
+     
+ int selectedRow = jTable1.getSelectedRow();
 
     if (selectedRow == -1) {
-
         JOptionPane.showMessageDialog(
             this,
             "Please select a student from the table first.",
             "No Student Selected",
             JOptionPane.WARNING_MESSAGE
         );
-
         return;
     }
 
-    model.setValueAt(
-        txt_studentnum.getText(),
-        selectedRow,
-        1
+    int studentID = Integer.parseInt(
+        jTable1.getValueAt(selectedRow, 0).toString()
     );
 
-    model.setValueAt(
-        txt_studentname.getText(),
-        selectedRow,
-        2
-    );
+    String studentNo = txt_studentnum.getText().trim();
+    String studentName = txt_studentname.getText().trim();
+    String contact = txt_contactnum.getText().trim();
+    String address = txt_address.getText().trim();
 
-    model.setValueAt(
-        txt_contactnum.getText(),
-        selectedRow,
-        3
-    );
-
-    model.setValueAt(
-        txt_address.getText(),
-        selectedRow,
-        4
-    );
-
-    JOptionPane.showMessageDialog(
-        this,
-        "Student information updated successfully!"
-    );
-
-   
-    }//GEN-LAST:event_btn_updateActionPerformed
-
-    private void btn_registerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_registerActionPerformed
-    String studentno = txt_studentnum.getText();
-    String studentname = txt_studentname.getText();
-    String contact = txt_contactnum.getText();
-    String address = txt_address.getText();
-
-    if (studentno.isEmpty() ||
-        studentname.isEmpty() ||
+    if (studentNo.isEmpty() ||
+        studentName.isEmpty() ||
         contact.isEmpty() ||
         address.isEmpty()) {
 
-        JOptionPane.showMessageDialog(this,"Please complete all fields.","Incomplete Information",JOptionPane.WARNING_MESSAGE);
+        JOptionPane.showMessageDialog(
+            this,
+            "Please complete all fields.",
+            "Incomplete Information",
+            JOptionPane.WARNING_MESSAGE
+        );
+         return;
+    }
+
+
+    }//GEN-LAST:event_btn_updateActionPerformed
+
+    private void btn_registerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_registerActionPerformed
+   
+    String studentNo =
+        txt_studentnum.getText().trim();
+
+    String studentName =
+        txt_studentname.getText().trim();
+
+    String contact =
+        txt_contactnum.getText().trim();
+
+    String address =
+        txt_address.getText().trim();
+
+    if (studentNo.isEmpty()
+            || studentName.isEmpty()
+            || contact.isEmpty()
+            || address.isEmpty()) {
+
+        JOptionPane.showMessageDialog(
+            this,
+            "Please complete all fields.",
+            "Incomplete Information",
+            JOptionPane.WARNING_MESSAGE
+        );
 
         return;
     }
 
-    int studentID = model.getRowCount() + 1;
+    String sql =
+        "INSERT INTO Table2 "
+        + "([Student No], [Student Name], "
+        + "[Contact No], [Address]) "
+        + "VALUES (?, ?, ?, ?)";
 
-    model.addRow(new Object[]{
-        studentID,
-        studentno,
-        studentname,
-        contact,
-        address
-    });
+    try (
+        Connection con = MsConnectAccess.conn();
+        PreparedStatement pst =
+            con.prepareStatement(sql)
+    ) {
 
-    JOptionPane.showMessageDialog(
-        this,
-        "Student registered successfully!"
-    );
+        pst.setString(1, studentNo);
+        pst.setString(2, studentName);
+        pst.setString(3, contact);
+        pst.setString(4, address);
 
-    
+        pst.executeUpdate();
 
+        JOptionPane.showMessageDialog(
+            this,
+            "Student registered successfully!"
+        );
+
+        clearFields();
+
+        loadStudents();
+
+    } catch (SQLException e) {
+
+        JOptionPane.showMessageDialog(
+            this,
+            "Error registering student:\n"
+            + e.getMessage(),
+            "Database Error",
+            JOptionPane.ERROR_MESSAGE
+        );
+    }
     }//GEN-LAST:event_btn_registerActionPerformed
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
@@ -451,21 +622,34 @@ public class CRUD extends javax.swing.JFrame {
     if (selectedRow >= 0) {
 
         txt_studentnum.setText(
-            model.getValueAt(selectedRow, 1).toString()
+            model.getValueAt(
+                selectedRow,
+                1
+            ).toString()
         );
 
         txt_studentname.setText(
-            model.getValueAt(selectedRow, 2).toString()
+            model.getValueAt(
+                selectedRow,
+                2
+            ).toString()
         );
 
         txt_contactnum.setText(
-            model.getValueAt(selectedRow, 3).toString()
+            model.getValueAt(
+                selectedRow,
+                3
+            ).toString()
         );
 
         txt_address.setText(
-            model.getValueAt(selectedRow, 4).toString()
+            model.getValueAt(
+                selectedRow,
+                4
+            ).toString()
         );
     }
+
     }//GEN-LAST:event_jTable1MouseClicked
 
     /**
